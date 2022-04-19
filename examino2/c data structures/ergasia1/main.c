@@ -23,7 +23,9 @@ int main(){
     printf("\n\ndata.size = %i\ndata.money = %f", data.size, data.money);
     data = removePQueue(pqueue);
     printf("\n\ndata.size = %i\ndata.money = %f", data.size, data.money);
-    data = removePQueue(pqueue);
+    data = peekPQueue(pqueue);
+    printf("\n\ndata.size = %i\ndata.money = %f", data.size, data.money);
+    data = peekPQueue(pqueue);
     printf("\n\ndata.size = %i\ndata.money = %f", data.size, data.money);
     return 0;
 }
