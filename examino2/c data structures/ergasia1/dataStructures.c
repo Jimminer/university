@@ -4,8 +4,7 @@ LIBRARY MADE BY DIMITRIOS GKOUMAS (cs04502)
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "dataStructures.h"
-// #include "dataStructuresVars.h"
+#include "dataStructuresVars.h"
 
 
 /* STACK (STIVA) */
@@ -220,7 +219,6 @@ void deletePQueue(PQueue *pqueue){
 }
 
 void addPQueue(PQueue *pqueue, int key, PQData data){
-    printf("\nADDING ITEM WITH KEY: %i", key);
     PQItem *pqitem = (PQItem*)malloc(sizeof(PQItem));
     pqitem->key = key;
     pqitem->data = data;
@@ -306,11 +304,7 @@ PQData peekPQueue(PQueue *pqueue){
     PQData data;
     if (!isEmptyPQueue(pqueue)){
         PQItem *pqitem = pqueue->front;
-        for(int i=0; i<pqueue->entries; i++){
-            data = pqitem->data;
-            printf("\n%i", pqitem->key);
-            pqitem = pqitem->nextItem;
-        }
+        data = pqitem->data;
     }
     return data;
 }
