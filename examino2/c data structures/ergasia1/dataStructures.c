@@ -3,7 +3,6 @@ LIBRARY MADE BY DIMITRIOS GKOUMAS (cs04502)
 */
 
 #include <stdlib.h>
-#include <stdio.h>
 #include "dataStructuresVars.h"
 
 
