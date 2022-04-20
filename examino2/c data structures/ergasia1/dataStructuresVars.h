@@ -4,7 +4,8 @@
 /* STACK (STIVA) */
 
 struct StackData{
-    int number;
+    int start;
+    int stop;
 };
 
 typedef struct StackData StackData;
@@ -12,7 +13,8 @@ typedef struct StackData StackData;
 /* QUEUE (OURA) */
 
 struct QueueData{
-    int number;
+    // Passenger Queue
+    int key;
 };
 
 typedef struct QueueData QueueData;
@@ -20,8 +22,9 @@ typedef struct QueueData QueueData;
 /* PRIORITY QUEUE (OURA PROTERAIOTITAS) */
 
 struct PQData{
-    int size;
-    float money;
+    int start;
+    int stop;
+    int pID;
 };
 
 typedef struct PQData PQData;
@@ -29,7 +32,10 @@ typedef struct PQData PQData;
 /* LINKED LIST (SINDEDEMENI LISTA) */
 
 struct LLData{
-    int key;
+    // Bus Stops
+    int number;
+    int codenum;
+    char name[40];
 };
 
 typedef struct LLData LLData;

@@ -3,6 +3,7 @@ LIBRARY MADE BY DIMITRIOS GKOUMAS (cs04502)
 */
 
 #include <stdlib.h>
+
 #include "dataStructuresVars.h"
 
 
@@ -349,7 +350,7 @@ void addLList(LList *llist, int position, LLData data){
         llist->front = llitem;
     }
     else{
-        if (position == -1 || position > llist->entries) position = llist->entries;
+        if (position > llist->entries || position < 0) position = llist->entries;
 
         if (position == 0){
             llitem->nextItem = llist->front;
@@ -378,7 +379,7 @@ LLData removeLList(LList *llist, int position){
     if (!isEmptyLList(llist)){
         LLItem *llitem = llist->front;
         int i;
-        if (position >= llist->entries) position = 0;
+        if (position >= llist->entries || position < 0) position = 0;
         if (position == 0){
             data = llitem->data;
             llist->front = llitem->nextItem;
@@ -403,7 +404,7 @@ LLData peekLList(LList *llist, int position){
     if (!isEmptyLList(llist)){
         LLItem *llitem = llist->front;
         int i;
-        if (position >= llist->entries) position = 0;
+        if (position >= llist->entries || position < 0) position = 0;
         if (position == 0){
             data = llitem->data;
         }
