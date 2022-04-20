@@ -5,22 +5,22 @@
 /* STACK (STIVA) */
 
 struct Stack{
-    int cur;
+    int current;
     int size;
-    int* items;
+    StackData *items;
 };
 
 typedef struct Stack Stack;
 
-Stack* createStack(int);
-int getSizeStack(Stack*);
-int isEmptyStack(Stack*);
-int isFullStack(Stack*);
-void emptyStack(Stack*);
-void deleteStack(Stack*);
-void addStack(Stack*, int);
-int removeStack(Stack*);
-int peekStack(Stack*);
+Stack *createStack(int size);
+int getSizeStack(Stack *stack);
+int isEmptyStack(Stack *stack);
+int isFullStack(Stack *stack);
+void emptyStack(Stack *stack);
+void deleteStack(Stack *stack);
+void addStack(Stack *stack, StackData data);
+StackData removeStack(Stack *stack);
+StackData peekStack(Stack *stack);
 
 /* QUEUE (OURA) */
 
@@ -28,20 +28,21 @@ struct Queue{
     int front;
     int back;
     int size;
-    int* items;
+    int entries;
+    QueueData *items;
 };
 
 typedef struct Queue Queue;
 
-Queue* createQueue(int);
-int getSizeQueue(Queue*);
-int isEmptyQueue(Queue*);
-int isFullQueue(Queue*);
-void emptyQueue(Queue*);
-void deleteQueue(Queue*);
-void addQueue(Queue*, int);
-int removeQueue(Queue*);
-int peekQueue(Queue*);
+Queue *createQueue(int size);
+int getSizeQueue(Queue *queue);
+int isEmptyQueue(Queue *queue);
+int isFullQueue(Queue *queue);
+void emptyQueue(Queue *queue);
+void deleteQueue(Queue *queue);
+void addQueue(Queue *queue, QueueData data);
+QueueData removeQueue(Queue *queue);
+QueueData peekQueue(Queue *queue);
 
 /* PRIORITY QUEUE (OURA PROTERAIOTITAS) */
 

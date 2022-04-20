@@ -13,7 +13,7 @@ LIBRARY MADE BY DIMITRIOS GKOUMAS (cs04502)
 struct Stack{
     int current;
     int size;
-    int *items;
+    StackData *items;
 };
 
 typedef struct Stack Stack;
@@ -22,7 +22,7 @@ Stack *createStack(int size){
     Stack *stack = (Stack*)malloc(sizeof(Stack));
     stack->current = -1;
     stack->size = size;
-    stack->items = (int*)malloc(sizeof(int) * size);
+    stack->items = (StackData*)malloc(sizeof(StackData) * size);
     return stack;
 }
 
@@ -43,29 +43,31 @@ void emptyStack(Stack *stack){
 }
 
 void deleteStack(Stack *stack){
+    free(stack->items);
     free(stack);
 }
 
-void addStack(Stack *stack, int item){
+void addStack(Stack *stack, StackData data){
     if (!isFullStack(stack)){
-        stack->items[++stack->current] = item;
+        stack->items[++stack->current] = data;
     }
 }
 
-int removeStack(Stack *stack){
+StackData removeStack(Stack *stack){
+    StackData data;
     if (!isEmptyStack(stack)){
-        int item = stack->items[stack->current];
+        data = stack->items[stack->current];
         stack->current--;
-        return item;
     }
-    return 0;
+    return data;
 }
 
-int peekStack(Stack *stack){
+StackData peekStack(Stack *stack){
+    StackData data;
     if (!isEmptyStack(stack)){
-        return stack->items[stack->current];
+        data = stack->items[stack->current];
     }
-    return 0;
+    return data;
 }
 
 
@@ -77,7 +79,7 @@ struct Queue{
     int back;
     int size;
     int entries;
-    int *items;
+    QueueData *items;
 };
 
 typedef struct Queue Queue;
@@ -88,7 +90,7 @@ Queue *createQueue(int size){
     queue->back = -1;
     queue->size = size;
     queue->entries = 0;
-    queue->items = (int*)malloc(sizeof(int) * size);
+    queue->items = (QueueData*)malloc(sizeof(QueueData) * size);
     return queue;
 }
 
@@ -111,31 +113,34 @@ void emptyQueue(Queue *queue){
 }
 
 void deleteQueue(Queue *queue){
+    free(queue->items);
     free(queue);
 }
 
-void addQueue(Queue *queue, int item){
+void addQueue(Queue *queue, QueueData data){
     if (!isFullQueue(queue)){
         queue->back++;
-        queue->items[queue->back % queue->size] = item;
+        queue->items[queue->back % queue->size] = data;
         queue->entries++;
     }
 }
 
-int removeQueue(Queue *queue){
+QueueData removeQueue(Queue *queue){
+    QueueData data;
     if (!isEmptyQueue(queue)){
         queue->front = (queue->front + 1) % queue->size;
         queue->entries--;
-        return queue->items[queue->front];
+        data = queue->items[queue->front];
     }
-    return 0;
+    return data;
 }
 
-int peekQueue(Queue *queue){
+QueueData peekQueue(Queue *queue){
+    QueueData data;
     if (!isEmptyQueue(queue)){
-        return queue->items[(queue->front + 1) % queue-> size];
+        data = queue->items[(queue->front + 1) % queue-> size];
     }
-    return 0;
+    return data;
 }
 
 

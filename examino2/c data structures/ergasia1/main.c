@@ -3,23 +3,23 @@
 #include "dataStructuresVars.h"
 
 int main(){
-    LLData data;
-    LList *llist = createLList();
-    data.key = 1;
-    addLList(llist, -1, data);
-    data.key = 5;
-    addLList(llist, -1, data);
-    data.key = 2;
-    addLList(llist, 39, data);
-    data.key = 9;
-    addLList(llist, 0, data);
-    peekeverything(llist);
-    data = peekLList(llist, 2);
-    printf("\nPEEK: %i", data.key);
-    data = peekLList(llist, 60);
-    printf("\nPEEK: %i", data.key);
-    data = peekLList(llist, 1);
-    printf("\nPEEK: %i", data.key);
-    peekeverything(llist);
+    Stack *stack = createStack(10);
+    StackData data;
+    data.number = 10;
+    addStack(stack, data);
+    data.number = 35;
+    addStack(stack, data);
+    data.number = 4;
+    addStack(stack, data);
+    data.number = 31;
+    addStack(stack, data);
+    data = removeStack(stack);
+    printf("\nREMOVED: %i", data.number);
+    data = removeStack(stack);
+    printf("\nREMOVED: %i", data.number);
+    data = removeStack(stack);
+    printf("\nREMOVED: %i", data.number);
+    data = removeStack(stack);
+    printf("\nREMOVED: %i", data.number);
     return 0;
 }
