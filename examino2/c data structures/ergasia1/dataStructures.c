@@ -31,21 +31,11 @@ int getSizeStack(Stack *stack){
 }
 
 int isEmptyStack(Stack *stack){
-    if (stack->current == -1){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    return (stack->current == -1);
 }
 
 int isFullStack(Stack *stack){
-    if (stack->current + 1 == stack->size){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    return (stack->current + 1 == stack->size);
 }
 
 void emptyStack(Stack *stack){
@@ -107,21 +97,11 @@ int getSizeQueue(Queue *queue){
 }
 
 int isEmptyQueue(Queue *queue){
-    if (queue->entries == 0){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    return (queue->entries == 0);
 }
 
 int isFullQueue(Queue *queue){
-    if (queue->entries == queue->size){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    return (queue->entries == queue->size);
 }
 
 void emptyQueue(Queue *queue){
@@ -191,12 +171,7 @@ int getSizePQueue(PQueue *pqueue){
 }
 
 int isEmptyPQueue(PQueue *pqueue){
-    if (pqueue->entries == 0){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    return (pqueue->entries == 0);
 }
 
 void emptyPQueue(PQueue *pqueue){
@@ -240,18 +215,18 @@ void addPQueue(PQueue *pqueue, int key, PQData data){
                 }
                 else{
                     int i;
-                    PQItem *pqitem2 = pqueue->front;
+                    PQItem *temp = pqueue->front;
                     for (i=0; i<pqueue->entries-1; i++){
-                        if (key < pqitem2->nextItem->key){
-                            pqitem->nextItem = pqitem2->nextItem;
-                            pqitem2->nextItem = pqitem;
+                        if (key < temp->nextItem->key){
+                            pqitem->nextItem = temp->nextItem;
+                            temp->nextItem = pqitem;
                             break;
                         }
-                        else if (pqitem2->nextItem->nextItem == NULL){
-                            pqitem2->nextItem->nextItem = pqitem;
+                        else if (temp->nextItem->nextItem == NULL){
+                            temp->nextItem->nextItem = pqitem;
                             break;
                         }
-                        pqitem2 = pqitem2->nextItem;
+                        temp = temp->nextItem;
                     }
                 }
             }
@@ -268,18 +243,18 @@ void addPQueue(PQueue *pqueue, int key, PQData data){
                 }
                 else{
                     int i;
-                    PQItem *pqitem2 = pqueue->front;
+                    PQItem *temp = pqueue->front;
                     for (i=0; i<pqueue->entries-1; i++){
-                        if (key > pqitem2->nextItem->key){
-                            pqitem->nextItem = pqitem2->nextItem;
-                            pqitem2->nextItem = pqitem;
+                        if (key > temp->nextItem->key){
+                            pqitem->nextItem = temp->nextItem;
+                            temp->nextItem = pqitem;
                             break;
                         }
-                        else if (pqitem2->nextItem->nextItem == NULL){
-                            pqitem2->nextItem->nextItem = pqitem;
+                        else if (temp->nextItem->nextItem == NULL){
+                            temp->nextItem->nextItem = pqitem;
                             break;
                         }
-                        pqitem2 = pqitem2->nextItem;
+                        temp = temp->nextItem;
                     }
                 }
             }
@@ -316,7 +291,7 @@ PQData peekPQueue(PQueue *pqueue){
 typedef struct LLItem LLItem;
 
 struct LLItem{
-    int value;
+    LLData data;
     LLItem *nextItem;
 };
 
@@ -327,7 +302,7 @@ struct LList{
 
 typedef struct LList LList;
 
-LList *createLList(int type){
+LList *createLList(){
     LList *llist = (LList*)malloc(sizeof(LList));
     llist->front = NULL;
     llist->entries = 0;
@@ -339,22 +314,18 @@ int getSizeLList(LList *llist){
 }
 
 int isEmptyLList(LList *llist){
-    if (llist->entries == 0){
-        return 1;
-    }
-    else{
-        return 0;
-    }
+    return (llist->entries == 0);
 }
 
 void emptyLList(LList *llist){
     if (!isEmptyLList(llist)){
         int i;
-        LLItem *llitem;
+        LLItem *llitem, *temp;
         llitem = llist->front;
         for(i=0;i<llist->entries;i++){
+            temp = llitem;
             free(llitem);
-            llitem = llitem->nextItem;
+            llitem = temp->nextItem;
         }
         llist->entries = 0;
     }
@@ -365,42 +336,81 @@ void deleteLList(LList *llist){
     free(llist);
 }
 
-void addLList(LList *llist, int item){
+void addLList(LList *llist, int position, LLData data){
     LLItem *llitem = (LLItem*)malloc(sizeof(LLItem));
-    llitem->value = item;
+    llitem->data = data;
     llitem->nextItem = NULL;
 
     if (isEmptyLList(llist)){
         llist->front = llitem;
     }
     else{
-        return;
+        if (position == -1 || position > llist->entries) position = llist->entries;
+
+        if (position == 0){
+            llitem->nextItem = llist->front;
+            llist->front = llitem;
+        }
+        else{
+            int i;
+            LLItem *temp = llist->front;
+            for (i=0; i<position-1; i++){
+                temp = temp->nextItem;
+            }
+            if (temp->nextItem == NULL){
+                temp->nextItem = llitem;
+            }
+            else{
+                llitem->nextItem = temp->nextItem;
+                temp->nextItem = llitem;
+            }
+        }
     }
     llist->entries++;
 }
 
-int removeLList(LList *llist){
+LLData removeLList(LList *llist, int position){
+    LLData data;
     if (!isEmptyLList(llist)){
-        int value;
         LLItem *llitem = llist->front;
-        value = llitem->value;
-        llist->front = llitem->nextItem;
+        int i;
+        if (position >= llist->entries) position = 0;
+        if (position == 0){
+            data = llitem->data;
+            llist->front = llitem->nextItem;
+        }
+        else{
+            LLItem *temp = llist->front;
+            for (i=0; i<position-1; i++){
+                temp = temp->nextItem;
+            }
+            llitem = temp->nextItem;
+            data = llitem->data;
+            temp->nextItem = llitem->nextItem;
+        }
         llist->entries--;
         free(llitem);
-        return value;
     }
-    return 0;
+    return data;
 }
 
-int peekLList(LList *llist){
+LLData peekLList(LList *llist, int position){
+    LLData data;
     if (!isEmptyLList(llist)){
-        LLItem *llitem;
-        llitem = llist->front;
-        for(int i=0; i<llist->entries; i++){
-            printf("\n%i", llitem->value);
-            llitem = llitem->nextItem;
+        LLItem *llitem = llist->front;
+        int i;
+        if (position >= llist->entries) position = 0;
+        if (position == 0){
+            data = llitem->data;
         }
-        return 0;
+        else{
+            LLItem *temp = llist->front;
+            for (i=0; i<position-1; i++){
+                temp = temp->nextItem;
+            }
+            llitem = temp->nextItem;
+            data = llitem->data;
+        }
     }
-    return 0;
+    return data;
 }

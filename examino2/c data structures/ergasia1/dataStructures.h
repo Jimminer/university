@@ -77,7 +77,7 @@ PQData peekPQueue(PQueue *pqueue);
 typedef struct LLItem LLItem;
 
 struct LLItem{
-    int value;
+    LLData data;
     LLItem *nextItem;
 };
 
@@ -88,13 +88,13 @@ struct LList{
 
 typedef struct LList LList;
 
-LList *createLList(int type);
+LList *createLList();
 int getSizeLList(LList *llist);
 int isEmptyLList(LList *llist);
 void emptyLList(LList *llist);
 void deleteLList(LList *llist);
-void addLList(LList *llist, int item);
-int removeLList(LList *llist);
-int peekLList(LList *llist);
+void addLList(LList *llist, int position, LLData data);
+LLData removeLList(LList *llist, int position);
+LLData peekLList(LList *llist, int position);
 
 #endif
