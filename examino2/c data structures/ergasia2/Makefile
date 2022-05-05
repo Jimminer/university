@@ -2,8 +2,8 @@
 PATHS = modules
 # Here you set your build directory (don't include slashes). You can leave it empty to build in current directory
 BUILD = build
-# Here you set your executable's name and it's extension (if needed). You can change it's build directory (Example: "OUTPUT = build\main.exe")
-OUTPUT = $(BUILD)$(SLASH)main.exe
+# Here you set your executable's name and it's extension (if needed). You can change it's build directory (Example: "$(BUILD)$(SLASH)main$(EXT)" or "output$(SLASH)main$(EXT)")
+OUTPUT = $(BUILD)$(SLASH)main$(EXT)
 # Here you choose if the program should automatically be run once compiled (True/False)
 AUTORUN = True
 
@@ -20,10 +20,12 @@ ifeq ($(OS), Windows_NT)
 	FIND = dir /s /a:-d *.c | findstr /e "\.c"
 	CLEAN = del
 	SLASH = \\
+	EXT = .exe
 else
 	FIND = find . -name "*.c" -type f -exec basename {} \;
 	CLEAN = rm
 	SLASH = /
+	EXT = 
 endif
 
 ifeq ($(AUTORUN), True)
