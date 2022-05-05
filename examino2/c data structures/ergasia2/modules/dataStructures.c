@@ -5,19 +5,12 @@ LIBRARY MADE BY DIMITRIOS GKOUMAS (cs04502)
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "dataStructures.h"
 #include "dataStructuresVars.h"
 
 
 /* STACK (STIVA) */
 
-
-struct Stack{
-    int current;
-    int size;
-    StackData *items;
-};
-
-typedef struct Stack Stack;
 
 Stack *createStack(int size){
     Stack *stack = (Stack*)malloc(sizeof(Stack));
@@ -74,16 +67,6 @@ StackData peekStack(Stack *stack){
 
 /* QUEUE (OURA) */
 
-
-struct Queue{
-    int front;
-    int back;
-    int size;
-    int entries;
-    QueueData *items;
-};
-
-typedef struct Queue Queue;
 
 Queue *createQueue(int size){
     Queue *queue = (Queue*)malloc(sizeof(Queue));
@@ -148,22 +131,6 @@ QueueData peekQueue(Queue *queue){
 /* PRIORITY QUEUE (OURA PROTERAIOTITAS) */
 
 
-typedef struct PQItem PQItem;
-
-struct PQItem{
-    int key;
-    PQData data;
-    PQItem *nextItem;
-};
-
-struct PQueue{
-    int type;
-    int entries;
-    PQItem *front;
-};
-
-typedef struct PQueue PQueue;
-
 PQueue *createPQueue(int type){
     PQueue *pqueue = (PQueue*)malloc(sizeof(PQueue));
     pqueue->type = type;
@@ -182,10 +149,10 @@ int isEmptyPQueue(PQueue *pqueue){
 
 void emptyPQueue(PQueue *pqueue){
     if (!isEmptyPQueue(pqueue)){
-        int i;
+        int i, m = pqueue->entries;
         PQItem *pqitem, *temp;
         pqitem = pqueue->front;
-        for(i=0;i<pqueue->entries;i++){
+        for(i=0;i<m;i++){
             temp = pqitem;
             free(pqitem);
             pqitem = temp->nextItem;
@@ -220,9 +187,9 @@ void addPQueue(PQueue *pqueue, int key, PQData data){
                     pqueue->front->nextItem = pqitem;
                 }
                 else{
-                    int i;
+                    int i, m = pqueue->entries;
                     PQItem *temp = pqueue->front;
-                    for (i=0; i<pqueue->entries-1; i++){
+                    for (i=0; i<m-1; i++){
                         if (key < temp->nextItem->key){
                             pqitem->nextItem = temp->nextItem;
                             temp->nextItem = pqitem;
@@ -248,9 +215,9 @@ void addPQueue(PQueue *pqueue, int key, PQData data){
                     pqueue->front->nextItem = pqitem;
                 }
                 else{
-                    int i;
+                    int i, m = pqueue->entries;
                     PQItem *temp = pqueue->front;
-                    for (i=0; i<pqueue->entries-1; i++){
+                    for (i=0; i<m-1; i++){
                         if (key > temp->nextItem->key){
                             pqitem->nextItem = temp->nextItem;
                             temp->nextItem = pqitem;
@@ -294,20 +261,6 @@ PQData peekPQueue(PQueue *pqueue){
 /* LINKED LIST (SINDEDEMENI LISTA) */
 
 
-typedef struct LLItem LLItem;
-
-struct LLItem{
-    LLData data;
-    LLItem *nextItem;
-};
-
-struct LList{
-    int entries;
-    LLItem *front;
-};
-
-typedef struct LList LList;
-
 LList *createLList(){
     LList *llist = (LList*)malloc(sizeof(LList));
     llist->front = NULL;
@@ -325,10 +278,10 @@ int isEmptyLList(LList *llist){
 
 void emptyLList(LList *llist){
     if (!isEmptyLList(llist)){
-        int i;
+        int i, m = llist->entries;
         LLItem *llitem, *temp;
         llitem = llist->front;
-        for(i=0;i<llist->entries;i++){
+        for(i=0;i<m;i++){
             temp = llitem;
             free(llitem);
             llitem = temp->nextItem;
@@ -420,3 +373,97 @@ LLData peekLList(LList *llist, int position){
     }
     return data;
 }
+
+
+/* BINARY TREE (DIADIKO DENTRO) */
+
+
+BinTree *createBinTree(){
+    BinTree *bintree = (BinTree*)malloc(sizeof(BinTree));
+    bintree->entries = 0;
+    bintree->root = NULL;
+    return bintree;
+}
+
+int getSizeBinTree(BinTree *bintree){
+    return bintree->entries;
+}
+
+int isEmptyBinTree(BinTree *bintree){
+    return (bintree->entries == 0);
+}
+
+void emptyBinTree(BinTree *bintree){
+    return;
+}
+
+void deleteBinTree(BinTree *bintree){
+    return;
+}
+
+void addBinTree(BinTree *bintree, int key, BTData data){
+    BTItem *btitem = (BTItem*)malloc(sizeof(BTItem));
+    btitem->key = key;
+    btitem->data = data;
+    btitem->Parent = NULL;
+    btitem->LChild = NULL;
+    btitem->RChild = NULL;
+
+    if (isEmptyBinTree(bintree)){
+        bintree->root = btitem;
+        bintree->root->Parent = bintree->root;
+        printf("\n\nADDED %i as root", key);
+    }
+    else{
+        if (getSizeBinTree(bintree) == 1){
+            if (key >= bintree->root->key){
+                btitem->Parent = bintree->root;
+                bintree->root->RChild = btitem;
+                printf("\n\nADDED %i as a right child of %i", key, btitem->Parent->key);
+            }
+            else{
+                btitem->Parent = bintree->root;
+                bintree->root->LChild = btitem;
+                printf("\n\nADDED %i as a left child of %i", key, btitem->Parent->key);
+            }
+        }
+        else{
+            BTItem *temp = bintree->root;
+            int i, m = bintree->entries;
+
+            for (i=0; i<m; i++){
+                if (key >= temp->key){
+                    if (temp->RChild == NULL){
+                        btitem->Parent = temp;
+                        temp->RChild = btitem;
+                        printf("\n\nADDED %i as a right child of %i", key, btitem->Parent->key);
+                        break;
+                    }
+                    else{
+                        temp = temp->RChild;
+                    }
+                }
+                else{
+                   if (temp->LChild == NULL){
+                        btitem->Parent = temp;
+                        temp->LChild = btitem;
+                        printf("\n\nADDED %i as a left child of %i", key, btitem->Parent->key);
+                        break;
+                    }
+                    else{
+                        temp = temp->LChild;
+                    }
+                }
+            }
+        }
+    }
+    bintree->entries++;
+}
+
+// void peekBinTree(BinTree *bintree){
+//     int i, m = bintree->entries;
+//     BTItem *temp = bintree->root;
+//     for (i=0; i<m; i++){
+//         break;
+//     }
+// }

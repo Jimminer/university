@@ -2,15 +2,16 @@
 #define DATA_STRUCTURES_H
 
 #include "dataStructuresVars.h"
+
 /* STACK (STIVA) */
+
+typedef struct Stack Stack;
 
 struct Stack{
     int current;
     int size;
     StackData *items;
 };
-
-typedef struct Stack Stack;
 
 Stack *createStack(int size);
 int getSizeStack(Stack *stack);
@@ -24,6 +25,8 @@ StackData peekStack(Stack *stack);
 
 /* QUEUE (OURA) */
 
+typedef struct Queue Queue;
+
 struct Queue{
     int front;
     int back;
@@ -31,8 +34,6 @@ struct Queue{
     int entries;
     QueueData *items;
 };
-
-typedef struct Queue Queue;
 
 Queue *createQueue(int size);
 int getSizeQueue(Queue *queue);
@@ -48,14 +49,14 @@ QueueData peekQueue(Queue *queue);
 
 typedef struct PQItem PQItem;
 
+typedef struct PQueue PQueue;
+
 struct PQueue{
     int type;
     int entries;
     PQItem *front;
     PQItem *back;
 };
-
-typedef struct PQueue PQueue;
 
 struct PQItem{
     int key;
@@ -77,6 +78,8 @@ PQData peekPQueue(PQueue *pqueue);
 
 typedef struct LLItem LLItem;
 
+typedef struct LList LList;
+
 struct LLItem{
     LLData data;
     LLItem *nextItem;
@@ -87,8 +90,6 @@ struct LList{
     LLItem *front;
 };
 
-typedef struct LList LList;
-
 LList *createLList();
 int getSizeLList(LList *llist);
 int isEmptyLList(LList *llist);
@@ -97,5 +98,29 @@ void deleteLList(LList *llist);
 void addLList(LList *llist, int position, LLData data);
 LLData removeLList(LList *llist, int position);
 LLData peekLList(LList *llist, int position);
+
+/* BINARY TREE (DIADIKO DENTRO) */
+
+typedef struct BTItem BTItem;
+
+typedef struct BinTree BinTree;
+
+struct BTItem{
+    int key;
+    BTData data;
+    BTItem *Parent;
+    BTItem *LChild;
+    BTItem *RChild;
+};
+
+struct BinTree{
+    int entries;
+    BTItem *root;
+};
+
+BinTree *createBinTree();
+int getSizeBinTree(BinTree *bintree);
+int isEmptyBinTree(BinTree *bintree);
+void addBinTree(BinTree *bintree, int key, BTData data);
 
 #endif

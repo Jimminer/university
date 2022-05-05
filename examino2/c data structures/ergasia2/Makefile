@@ -1,38 +1,69 @@
-# Changes the clean command according to our operating system
+# Here you set your directories that include your .c files (Example: "PATHS = sources libraries" will include the directories sources and libraries)
+PATHS = modules
+# Here you set your build directory (don't include slashes). You can leave it empty to build in current directory
+BUILD = build
+# Here you set your executable's name and it's extension (if needed). You can change it's build directory (Example: "OUTPUT = build\main.exe")
+OUTPUT = $(BUILD)$(SLASH)main.exe
+# Here you choose if the program should automatically be run once compiled (True/False)
+AUTORUN = True
+
+
+#								   #
+#								   #
+# Don't modify anything below here #
+#								   #
+#								   #
+
+
+# Things that change based on our operating system
 ifeq ($(OS), Windows_NT)
-	CLEAN = rmdir /q /s
+	FIND = dir /s /a:-d *.c | findstr /e "\.c"
+	CLEAN = del
+	SLASH = \\
 else
-	CLEAN = rm -rf
+	FIND = find . -name "*.c" -type f -exec basename {} \;
+	CLEAN = rm
+	SLASH = /
 endif
 
-INCLUDES = -Imodules
-VPATH = modules
-BUILD = build
-OUTPUT = main
+ifeq ($(AUTORUN), True)
+	AUTORUN = run
+else
+	AUTORUN = 
+endif
+
+ifeq ($(BUILD),)
+	SLASH = 
+endif
+
+INCLUDES = $(addprefix -I, $(PATHS))
+VPATH = $(PATHS)
 
 CC = gcc
 CFLAGS = -Wall $(INCLUDES)
 
-SRCS = main.c dataStructures.c
-OBJS = $(patsubst %.c, $(BUILD)/%.o, $(SRCS)) # Gets .o from every .c given in $(SRCS)
+SRCS = $(filter %.c, $(shell $(FIND)))
+OBJS = $(patsubst %.c, $(BUILD)$(SLASH)%.o, $(SRCS)) # Gets .o from every .c in $(SRCS)
 
-default: checkBuildDir $(OUTPUT)
-	@$(BUILD)/$(OUTPUT)
+default: checkBuildDirectory $(OUTPUT) $(AUTORUN)
 
 # Link .o files and put the output in the build directory
-$(OUTPUT):$(OBJS) $(HEADERS)
-	@$(CC) $(CFLAGS) -o $(BUILD)/$(OUTPUT) $(OBJS)
+$(OUTPUT):$(OBJS)
+	@$(CC) $(CFLAGS) -o $(OUTPUT) $(OBJS)
 
 # Compile .c files into .o files and put them in the build directory (When a source file changes, it is compiled again)
-$(BUILD)/%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(BUILD)$(SLASH)%.o: %.c
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
-# Check if the build directory exists. If not, create it
-checkBuildDir: $(BUILD)
+checkBuildDirectory: $(BUILD)
 
 $(BUILD):
 	@mkdir $(BUILD)
 
-# Delete the build directory including it's files
+# Run the compiled program
+run: $(OUTPUT)
+	@./$(OUTPUT)
+
+# Delete all created files
 clean:
-	@$(CLEAN) $(BUILD)
+	@$(CLEAN) $(OBJS) $(OUTPUT)
