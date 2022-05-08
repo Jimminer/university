@@ -4,7 +4,7 @@
 /* STACK (STIVA) */
 
 struct StackData{
-
+    
 };
 
 typedef struct StackData StackData;
@@ -12,7 +12,7 @@ typedef struct StackData StackData;
 /* QUEUE (OURA) */
 
 struct QueueData{
-
+    
 };
 
 typedef struct QueueData QueueData;
@@ -20,7 +20,7 @@ typedef struct QueueData QueueData;
 /* PRIORITY QUEUE (OURA PROTERAIOTITAS) */
 
 struct PQData{
-
+    
 };
 
 typedef struct PQData PQData;
@@ -28,7 +28,7 @@ typedef struct PQData PQData;
 /* LINKED LIST (SINDEDEMENI LISTA) */
 
 struct LLData{
-
+    
 };
 
 typedef struct LLData LLData;
@@ -36,7 +36,8 @@ typedef struct LLData LLData;
 /* BINARY TREE (DIADIKO DENTRO) */
 
 struct BTData{
-    int skata;
+    int hours;
+    int location;
 };
 
 typedef struct BTData BTData;

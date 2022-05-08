@@ -393,66 +393,57 @@ int isEmptyBinTree(BinTree *bintree){
     return (bintree->entries == 0);
 }
 
+void internal_deleteBTItem(BTItem *btitem){
+    if (btitem!=NULL){
+        internal_deleteBTItem(btitem->LChild);
+        internal_deleteBTItem(btitem->RChild);
+        free(btitem);
+    }
+}
+
 void emptyBinTree(BinTree *bintree){
-    return;
+    if (!isEmptyBinTree(bintree)){
+        internal_deleteBTItem(bintree->root);
+        bintree->entries = 0;
+    }
 }
 
 void deleteBinTree(BinTree *bintree){
-    return;
+    emptyBinTree(bintree);
+    free(bintree);
 }
 
 void addBinTree(BinTree *bintree, int key, BTData data){
     BTItem *btitem = (BTItem*)malloc(sizeof(BTItem));
     btitem->key = key;
     btitem->data = data;
-    btitem->Parent = NULL;
     btitem->LChild = NULL;
     btitem->RChild = NULL;
 
     if (isEmptyBinTree(bintree)){
         bintree->root = btitem;
-        bintree->root->Parent = bintree->root;
-        printf("\n\nADDED %i as root", key);
     }
     else{
-        if (getSizeBinTree(bintree) == 1){
-            if (key >= bintree->root->key){
-                btitem->Parent = bintree->root;
-                bintree->root->RChild = btitem;
-                printf("\n\nADDED %i as a right child of %i", key, btitem->Parent->key);
-            }
-            else{
-                btitem->Parent = bintree->root;
-                bintree->root->LChild = btitem;
-                printf("\n\nADDED %i as a left child of %i", key, btitem->Parent->key);
-            }
-        }
-        else{
-            BTItem *temp = bintree->root;
-            int i, m = bintree->entries;
+        BTItem *temp = bintree->root;
+        int i, m = bintree->entries;
 
-            for (i=0; i<m; i++){
-                if (key >= temp->key){
-                    if (temp->RChild == NULL){
-                        btitem->Parent = temp;
-                        temp->RChild = btitem;
-                        printf("\n\nADDED %i as a right child of %i", key, btitem->Parent->key);
-                        break;
-                    }
-                    else{
-                        temp = temp->RChild;
-                    }
+        for (i=0; i<m; i++){
+            if (key >= temp->key){
+                if (temp->RChild == NULL){
+                    temp->RChild = btitem;
+                    break;
                 }
                 else{
-                   if (temp->LChild == NULL){
-                        btitem->Parent = temp;
-                        temp->LChild = btitem;
-                        printf("\n\nADDED %i as a left child of %i", key, btitem->Parent->key);
-                        break;
-                    }
-                    else{
-                        temp = temp->LChild;
-                    }
+                    temp = temp->RChild;
+                }
+            }
+            else{
+                if (temp->LChild == NULL){
+                    temp->LChild = btitem;
+                    break;
+                }
+                else{
+                    temp = temp->LChild;
                 }
             }
         }
@@ -460,10 +451,178 @@ void addBinTree(BinTree *bintree, int key, BTData data){
     bintree->entries++;
 }
 
+// void internal_findSuccessorBinTree(BTItem *btitem, int *current, int searchKey){
+//     if (btitem != NULL){
+//         if (btitem->key > searchKey && btitem->key < *current){
+//             *current = btitem->key;
+//             printf("FOUND: %i", btitem->key);
+//         }
+//     }
+// }
+
+// BTData removeBinTree(BinTree *bintree, int key){
+//     BTData data;
+//     if (!isEmptyBinTree(bintree)){
+//         BTItem *temp = bintree->root;
+//         int i, m = bintree->entries, current = 0, *c;
+//         c = &current;
+
+//         for (i=0; i<m; i++){
+//             if (key == temp->key){
+//                 break;
+//             }
+//             else if (key > temp->key){
+//                 temp = temp->RChild;
+//             }
+//             else{
+//                 temp = temp->LChild;
+//             }
+//         }
+
+//         internal_findSuccessorBinTree(temp, c, key);
+//     }
+//     return data;
+// }
+
+BTItem *internal_findBinTree(BinTree *bintree, int key){
+    BTItem *temp = bintree->root;
+    int i, m = bintree->entries;
+
+    for (i=0; i<m; i++){
+        if (key == temp->key){
+            break;
+        }
+        else if (key > temp->key && (temp->RChild != NULL)){
+            temp = temp->RChild;
+        }
+        else if (key < temp->key && (temp->LChild != NULL)){
+            temp = temp->LChild;
+        }
+    }
+
+    return temp;
+}
+
+BTData findBinTree(BinTree *bintree, int key){
+    BTData data;
+    if (!isEmptyBinTree(bintree)){
+        BTItem *btitem = internal_findBinTree(bintree, key);
+        data = btitem->data;
+    }
+    return data;
+}
+
+void internal_preOrderBinTree(BTItem *btitem, int *table, int *counter){
+    if (btitem!=NULL){
+        table[*counter] = btitem->key;
+        (*counter)++;
+        internal_preOrderBinTree(btitem->LChild, table, counter);
+        internal_preOrderBinTree(btitem->RChild, table, counter);
+    }
+}
+
+void internal_inOrderBinTree(BTItem *btitem, int *table, int *counter){
+    if (btitem!=NULL){
+        internal_inOrderBinTree(btitem->LChild, table, counter);
+        table[*counter] = btitem->key;
+        (*counter)++;
+        internal_inOrderBinTree(btitem->RChild, table, counter);
+    }
+}
+
+void internal_postOrderBinTree(BTItem *btitem, int *table, int *counter){
+    if (btitem!=NULL){
+        internal_postOrderBinTree(btitem->LChild, table, counter);
+        internal_postOrderBinTree(btitem->RChild, table, counter);
+        table[*counter] = btitem->key;
+        (*counter)++;
+    }
+}
+
+int *preOrderBinTree(BinTree *bintree){
+    int *table = (int*)malloc(sizeof(int)*bintree->entries);
+    if (!isEmptyBinTree(bintree)){
+        int counter = 0, *c;
+        c = &counter;
+
+        internal_preOrderBinTree(bintree->root, table, c);
+    }
+    return table;
+}
+
+    // EXAMPLE:
+    // int *table;
+    // table = preOrderBinTree(bintree);
+    // printf("\nPreorder: ");
+    // for (int i=0; i<20; i++){
+    //     if (!table[i]) break;
+    //     printf("%i,", table[i]);
+    // }
+
+int *inOrderBinTree(BinTree *bintree){
+    int *table = (int*)malloc(sizeof(int)*bintree->entries);
+    if (!isEmptyBinTree(bintree)){
+        int counter = 0, *c;
+        c = &counter;
+
+        internal_inOrderBinTree(bintree->root, table, c);
+    }
+    return table;
+}
+
+    // EXAMPLE:
+    // int *table;
+    // table = inOrderBinTree(bintree);
+    // printf("\nInorder: ");
+    // for (int i=0; i<20; i++){
+    //     if (!table[i]) break;
+    //     printf("%i,", table[i]);
+    // }
+
+int *postOrderBinTree(BinTree *bintree){
+    int *table = (int*)malloc(sizeof(int)*bintree->entries);
+    if (!isEmptyBinTree(bintree)){
+        int counter = 0, *c;
+        c = &counter;
+
+        internal_postOrderBinTree(bintree->root, table, c);
+    }
+    return table;
+}
+
+    // EXAMPLE:
+    // int *table;
+    // table = postOrderBinTree(bintree);
+    // printf("\nPostorder: ");
+    // for (int i=0; i<20; i++){
+    //     if (!table[i]) break;
+    //     printf("%i,", table[i]);
+    // }
+
+
 // void peekBinTree(BinTree *bintree){
-//     int i, m = bintree->entries;
+//     int i, started = 0, m = bintree->entries;
 //     BTItem *temp = bintree->root;
-//     for (i=0; i<m; i++){
-//         break;
+//     while(1){
+//         if (started && (temp == bintree->root)){
+//             break;
+//         }
+//         else if (temp->LChild != NULL){
+//             printf("%i\n", temp->key);
+//             temp = temp->LChild;
+//             printf("%i\n", temp->key);
+//             started = 1;
+//             continue;
+//         }
+//         else if (temp->RChild != NULL){
+//             printf("%i\n", temp->key);
+//             temp = temp->RChild;
+//             printf("%i\n", temp->key);
+//             started = 1;
+//             continue;
+//         }
+//         else{
+//             temp = temp->Parent;
+//         }
 //     }
 // }

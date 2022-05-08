@@ -108,7 +108,6 @@ typedef struct BinTree BinTree;
 struct BTItem{
     int key;
     BTData data;
-    BTItem *Parent;
     BTItem *LChild;
     BTItem *RChild;
 };
@@ -121,6 +120,13 @@ struct BinTree{
 BinTree *createBinTree();
 int getSizeBinTree(BinTree *bintree);
 int isEmptyBinTree(BinTree *bintree);
+void emptyBinTree(BinTree *bintree);
+void deleteBinTree(BinTree *bintree);
 void addBinTree(BinTree *bintree, int key, BTData data);
+// BTData removeBinTree(BinTree *bintree, int key);
+BTData findBinTree(BinTree *bintree, int key);
+int *preOrderBinTree(BinTree *bintree);
+int *inOrderBinTree(BinTree *bintree);
+int *postOrderBinTree(BinTree *bintree);
 
 #endif

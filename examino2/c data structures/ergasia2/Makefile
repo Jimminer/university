@@ -6,6 +6,8 @@ BUILD = build
 OUTPUT = $(BUILD)$(SLASH)main$(EXT)
 # Here you choose if the program should automatically be run once compiled (True/False)
 AUTORUN = True
+# Here you set the output of the run file (leave empty to see the output in the terminal). Only works on Linux
+FILEOUTPUT = #$(BUILD)$(SLASH)output.txt
 
 
 #								   #
@@ -32,6 +34,12 @@ ifeq ($(AUTORUN), True)
 	AUTORUN = run
 else
 	AUTORUN = 
+endif
+
+ifeq ($(FILEOUTPUT),)
+	OUTPUTCOMMAND = 
+else
+	OUTPUTCOMMAND = > $(FILEOUTPUT)
 endif
 
 ifeq ($(BUILD),)
@@ -64,8 +72,12 @@ $(BUILD):
 
 # Run the compiled program
 run: $(OUTPUT)
-	@./$(OUTPUT)
+	@./$(OUTPUT) $(OUTPUTCOMMAND)
 
 # Delete all created files
 clean:
-	@$(CLEAN) $(OBJS) $(OUTPUT)
+	@$(CLEAN) $(OBJS) $(OUTPUT) $(FILEOUTPUT)
+
+# Only works on GNU
+mem:
+	@memusage -T $(OUTPUT)
