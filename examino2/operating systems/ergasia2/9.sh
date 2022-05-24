@@ -7,7 +7,7 @@ fi
 
 file=$(ls -Art | tail -n 1)
 
-if [ $(find ./ -maxdepth 0 -type f -name "$1" | wc -l) -gt 0 ]; then
+if [ $(find . -maxdepth 1 -type f -name "$1" | wc -l) -gt 0 ]; then
     echo "Error! File $1 already exists!"
     exit 1
 else
