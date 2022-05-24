@@ -5,7 +5,7 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-if [ "$(grep -c "^$1" /etc/passwd)" -gt 0 ]; then
+if [ "$(grep -c "^$1:" /etc/passwd)" -gt 0 ]; then
     echo "User $1 found"
 else
     echo "User not found"
