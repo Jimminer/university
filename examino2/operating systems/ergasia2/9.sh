@@ -5,7 +5,7 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-file=$(ls -Art | tail -n 1)
+file=$(ls -Artp | grep -v / | tail -n 1)
 
 if [ $(find . -maxdepth 1 -type f -name "$1" | wc -l) -gt 0 ]; then
     echo "Error! File $1 already exists!"
