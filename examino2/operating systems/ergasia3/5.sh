@@ -16,17 +16,12 @@ case $selection in
         echo "To onoma xristi einai: $USER"
     ;;
 
-    "e")
-        echo "Exiting..."
-        exit 1
-    ;;
-
-    "E")
+    [Ee])
         echo "Exiting..."
         exit 1
     ;;
 
     *)
-        echo "Invalid number"
+        echo "Invalid selection"
     ;;
 esac
