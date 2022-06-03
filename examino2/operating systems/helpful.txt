@@ -1,1 +1,2 @@
 https://pubs.opengroup.org/onlinepubs/9699919799/utilities/
+https://acloudguru.com/blog/engineering/conditions-in-bash-scripting-if-statements
