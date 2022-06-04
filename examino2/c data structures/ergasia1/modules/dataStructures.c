@@ -4,19 +4,12 @@ LIBRARY MADE BY DIMITRIOS GKOUMAS (cs04502)
 
 #include <stdlib.h>
 
+#include "dataStructures.h"
 #include "dataStructuresVars.h"
 
 
 /* STACK (STIVA) */
 
-
-struct Stack{
-    int current;
-    int size;
-    StackData *items;
-};
-
-typedef struct Stack Stack;
 
 Stack *createStack(int size){
     Stack *stack = (Stack*)malloc(sizeof(Stack));
@@ -73,16 +66,6 @@ StackData peekStack(Stack *stack){
 
 /* QUEUE (OURA) */
 
-
-struct Queue{
-    int front;
-    int back;
-    int size;
-    int entries;
-    QueueData *items;
-};
-
-typedef struct Queue Queue;
 
 Queue *createQueue(int size){
     Queue *queue = (Queue*)malloc(sizeof(Queue));
@@ -147,22 +130,6 @@ QueueData peekQueue(Queue *queue){
 /* PRIORITY QUEUE (OURA PROTERAIOTITAS) */
 
 
-typedef struct PQItem PQItem;
-
-struct PQItem{
-    int key;
-    PQData data;
-    PQItem *nextItem;
-};
-
-struct PQueue{
-    int type;
-    int entries;
-    PQItem *front;
-};
-
-typedef struct PQueue PQueue;
-
 PQueue *createPQueue(int type){
     PQueue *pqueue = (PQueue*)malloc(sizeof(PQueue));
     pqueue->type = type;
@@ -185,9 +152,9 @@ void emptyPQueue(PQueue *pqueue){
         PQItem *pqitem, *temp;
         pqitem = pqueue->front;
         for(i=0;i<pqueue->entries;i++){
-            temp = pqitem;
+            temp = pqitem->nextItem;
             free(pqitem);
-            pqitem = temp->nextItem;
+            pqitem = temp;
         }
         pqueue->entries = 0;
     }
@@ -293,20 +260,6 @@ PQData peekPQueue(PQueue *pqueue){
 /* LINKED LIST (SINDEDEMENI LISTA) */
 
 
-typedef struct LLItem LLItem;
-
-struct LLItem{
-    LLData data;
-    LLItem *nextItem;
-};
-
-struct LList{
-    int entries;
-    LLItem *front;
-};
-
-typedef struct LList LList;
-
 LList *createLList(){
     LList *llist = (LList*)malloc(sizeof(LList));
     llist->front = NULL;
@@ -328,9 +281,9 @@ void emptyLList(LList *llist){
         LLItem *llitem, *temp;
         llitem = llist->front;
         for(i=0;i<llist->entries;i++){
-            temp = llitem;
+            temp = llitem->nextItem;
             free(llitem);
-            llitem = temp->nextItem;
+            llitem = temp;
         }
         llist->entries = 0;
     }

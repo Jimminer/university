@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "dataStructures.h"
-#include "dataStructuresVars.h"
+#include "modules/dataStructures.h"
+#include "modules/dataStructuresVars.h"
 
 int currentStop = 0;
 int passengerID = 0;
@@ -18,7 +18,6 @@ void init(LList*, PQueue*);
 void nextStop(LList*, PQueue*, Queue*, Stack*);
 
 int main(){
-    int i;
     LList *busStops = createLList();
     PQueue *passengers = createPQueue(0);
     Queue *gettingOn = createQueue(85);
@@ -36,6 +35,10 @@ int main(){
     lldata2 = peekLList(busStops, highOnStop+1);
     lldata3 = peekLList(busStops, highGettingOffStop);
     printf("\nPlirofories dromologiou:\n1. Eksipiretithikan sinolika %i atoma\n2. %i atoma den eksipiretithikan\n3. Metaksi ton staseon %i - %i to leoforeio eixe %i epivates\n4. Sti stasi %i katevikan %i atoma\n5. Mesos oros aposastis metrimenos se staseis: %f", passengerID, notServed, lldata.number, lldata2.number, highOn, lldata3.number, highGettingOff, (float)avgDist/(float)passengerID);
+    deleteLList(busStops);
+    deletePQueue(passengers);
+    deleteQueue(gettingOn);
+    deleteStack(gettingOff);
     return 0;
 }
 
@@ -118,7 +121,7 @@ void init(LList *busStops, PQueue *passengers){
 }
 
 void nextStop(LList *busStops, PQueue *passengers, Queue *gettingOn, Stack *gettingOff){
-    int i = 0, gotOff = 0, randPassengers;
+    int i = 0, randPassengers;
     LLData lldata;
     PQData pqdata;
     QueueData queuedata;
