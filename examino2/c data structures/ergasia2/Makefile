@@ -45,10 +45,10 @@ else
 endif
 
 ifeq ($(DEBUG), True)
-	DEBUG = debug
+	DEBUG = valgrind --leak-check=full 
 	DEBUGFLAG = -Werror -g3
 else
-	DEBUG = 
+	DEBUG = ./
 	DEBUGFLAG = 
 endif
 
@@ -65,7 +65,7 @@ CFLAGS = -Wall $(DEBUGFLAG) $(INCLUDES)
 SRCS = $(filter %.c, $(shell $(FIND)))
 OBJS = $(patsubst %.c, $(BUILD)$(SLASH)%.o, $(SRCS)) # Gets .o from every .c in $(SRCS)
 
-default: checkBuildDirectory $(OUTPUT) $(AUTORUN) $(DEBUG)
+default: checkBuildDirectory $(OUTPUT) $(AUTORUN)
 
 # Link .o files and put the output in the build directory
 $(OUTPUT):$(OBJS)
@@ -73,7 +73,7 @@ $(OUTPUT):$(OBJS)
 
 # Compile .c files into .o files and put them in the build directory (When a source file changes, it is compiled again)
 $(BUILD)$(SLASH)%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 checkBuildDirectory: $(BUILD)
 
@@ -82,14 +82,11 @@ $(BUILD):
 
 # Run the compiled program
 run: $(OUTPUT)
-	@./$(OUTPUT) $(OUTPUTCOMMAND)
+	@$(DEBUG)$(OUTPUT) $(OUTPUTCOMMAND)
 
 # Delete all created files
 clean:
 	@$(CLEAN) $(OBJS) $(OUTPUT) $(FILEOUTPUT)
-
-debug:
-	@valgrind --leak-check=full $(OUTPUT)
 
 # Only works on GNU
 mem:

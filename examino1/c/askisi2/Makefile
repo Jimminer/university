@@ -1,5 +1,5 @@
 # Here you set your directories that include your .c files (Example: "PATHS = sources libraries" will include the directories sources and libraries)
-PATHS = modules
+PATHS = 
 # Here you set your build directory (don't include slashes). You can leave it empty to build in current directory
 BUILD = build
 # Here you set your executable's name and it's extension (if needed). You can change it's build directory (Example: "$(BUILD)$(SLASH)main$(EXT)" or "output$(SLASH)main$(EXT)")
@@ -45,10 +45,10 @@ else
 endif
 
 ifeq ($(DEBUG), True)
-	DEBUG = debug
+	DEBUG = valgrind --leak-check=full 
 	DEBUGFLAG = -Werror -g3
 else
-	DEBUG = 
+	DEBUG = ./
 	DEBUGFLAG = 
 endif
 
@@ -65,7 +65,7 @@ CFLAGS = -Wall $(DEBUGFLAG) $(INCLUDES)
 SRCS = $(filter %.c, $(shell $(FIND)))
 OBJS = $(patsubst %.c, $(BUILD)$(SLASH)%.o, $(SRCS)) # Gets .o from every .c in $(SRCS)
 
-default: checkBuildDirectory $(OUTPUT) $(AUTORUN) $(DEBUG)
+default: checkBuildDirectory $(OUTPUT) $(AUTORUN)
 
 # Link .o files and put the output in the build directory
 $(OUTPUT):$(OBJS)
@@ -82,14 +82,11 @@ $(BUILD):
 
 # Run the compiled program
 run: $(OUTPUT)
-	@./$(OUTPUT) $(OUTPUTCOMMAND)
+	@$(DEBUG)$(OUTPUT) $(OUTPUTCOMMAND)
 
 # Delete all created files
 clean:
 	@$(CLEAN) $(OBJS) $(OUTPUT) $(FILEOUTPUT)
-
-debug:
-	@valgrind --leak-check=full $(OUTPUT)
 
 # Only works on GNU
 mem:
