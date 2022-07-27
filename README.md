@@ -1,4 +1,2 @@
 # university
-University Projects
-
-# BestDev = GeorgeRG
+All university projects/tests!
