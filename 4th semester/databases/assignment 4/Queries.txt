@@ -1,0 +1,141 @@
+1:
+
+SELECT *
+FROM customers
+WHERE creditLimit >= ALL (
+  SELECT creditLimit
+  FROM customers
+);
+
+
+2:
+
+SELECT *
+FROM customers
+WHERE creditLimit <= ALL (
+  SELECT creditLimit
+  FROM customers
+  WHERE city = "London"
+);
+
+
+3:
+
+SELECT *
+FROM customers
+WHERE city = ANY (
+  SELECT city
+  FROM offices
+);
+
+
+4:
+
+SELECT customerNumber
+FROM customers
+WHERE creditLimit = ANY (
+  SELECT creditLimit
+  FROM customers
+  WHERE city = "London" OR city = "Paris"
+);
+
+
+5:
+
+SELECT orderNumber, status
+FROM orders
+WHERE orderNumber IN (
+  SELECT orderNumber
+  FROM orderdetails
+  WHERE productCode = "S12_1108"
+);
+
+
+6:
+
+SELECT firstName, lastName
+FROM employees
+WHERE employeeNumber IN (
+  SELECT salesRepEmployeeNumber
+  FROM customers
+);
+
+
+7:
+
+SELECT *
+FROM customers
+WHERE creditLimit > 50000 AND creditLimit < 100000 AND (city = "London" OR city = "Paris" OR city = "Madrid" OR city = "NYC")
+
+
+8:
+
+SELECT *
+FROM customers
+WHERE city != "London"
+
+
+9.1:
+
+SELECT orderNumber, orderDate
+FROM orders
+WHERE orderNumber IN (
+  SELECT orderNumber
+  FROM orderdetails
+  WHERE quantityOrdered > 50 AND quantityOrdered < 150
+);
+
+
+9.2:
+
+SELECT a.orderNumber, a.orderDate
+FROM orders a
+WHERE EXISTS (
+  SELECT b.orderNumber, SUM(b.quantityOrdered) AS quantity
+  FROM orderdetails b
+  GROUP BY b.orderNumber
+  HAVING quantity > 50 AND quantity < 150 AND a.orderNumber = b.orderNumber
+);
+
+
+10:
+
+SELECT *
+FROM customers
+WHERE customerNumber IN (
+  SELECT customerNumber
+  FROM orders
+  WHERE orderNumber IN (
+    SELECT orderNumber
+    FROM orderdetails
+    WHERE productCode IN (
+      SELECT productCode
+      FROM products
+      WHERE quantityInStock < 50
+    )
+  )
+);
+
+
+11:
+
+(SELECT city
+FROM customers)
+UNION
+(SELECT city
+FROM offices)
+
+
+12:
+
+SELECT DISTINCT city
+FROM customers
+WHERE customerNumber IN (
+  SELECT customerNumber
+  FROM orders
+  WHERE orderNumber IN (
+    SELECT orderNumber
+    FROM orderdetails
+    WHERE productCode = "S10_1678"
+  )
+);

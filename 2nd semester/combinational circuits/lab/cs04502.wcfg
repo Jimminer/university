@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/lab/Desktop/xristos/ergasia4502/schema_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="numeric_std" />
+            <top_module name="schema" />
+            <top_module name="std_logic_1164" />
+            <top_module name="textio" />
+            <top_module name="vcomponents" />
+            <top_module name="vital_timing" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="4" />
+   <wvobject fp_name="/schema/inp" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">inp</obj_property>
+      <obj_property name="ObjectShortName">inp</obj_property>
+   </wvobject>
+   <wvobject fp_name="/schema/outp" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">outp</obj_property>
+      <obj_property name="ObjectShortName">outp</obj_property>
+   </wvobject>
+   <wvobject fp_name="/schema/xlxn_1" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">xlxn_1</obj_property>
+      <obj_property name="ObjectShortName">xlxn_1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/schema/xlxn_2" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">xlxn_2</obj_property>
+      <obj_property name="ObjectShortName">xlxn_2</obj_property>
+   </wvobject>
+</wave_config>

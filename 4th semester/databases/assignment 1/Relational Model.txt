@@ -1,0 +1,17 @@
+Head(Patient) = {#ssn, name, gender, bDate}
+Head(PatientAddresses) = {ssn, address}
+Head(PatientInsurances) = {ssn, insurance}
+Head(PreviousDiagnoses) = {patientSsn, date, disease}
+
+Head(ClinicDoc) = {#ssn, name, specialty, clinicName, workingAtClinicSince, yearsServed}
+Head(LabDoc) = {#ssn, name, specialty, clinicName, workingAtClinicSince, diseaseType}
+Head(DoctorAddresses) = {ssn, address}
+Head(DoctorPhones) = {ssn, phone}
+
+Head(Clinic) = {#name, bedNo, managerSsn}
+
+Head(Diagnosis) = {#id, description, disease, antidote, price}
+
+Head(Diagnoses) = {diagnosisId, patientSsn, doctorSsn, results}
+
+Head(Hospitalizations) = {patientSsn,  clinicName, startDate, endDate}

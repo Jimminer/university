@@ -1,0 +1,60 @@
+1m 18s
+
+Current time: 191319670.19          
+Unprocessed tasks: 0          
+Requests left: -17          
+Tasks left in queue: 0          
+Server 0 stats:
+
+Processor 0 (CPU):
+    Total tasks: 366
+    Served tasks: 353
+    Dropped tasks: 13 (3.55%)
+    Tasks left in queue: 0
+    Average waiting time: 478.0 seconds
+    Total busy time: 0.01%
+    Total power consumption: 7479.7 W
+    Task type counts:
+        eMBB: 47
+        IoT: 77
+        URLLC: 229
+
+
+Processor 1 (GPU):
+    Total tasks: 325
+    Served tasks: 325
+    Dropped tasks: 0 (0.0%)
+    Tasks left in queue: 0
+    Average waiting time: 421.5 seconds
+    Total busy time: 0.0%
+    Total power consumption: 8667.8 W
+    Task type counts:
+        eMBB: 34
+        IoT: 78
+        URLLC: 213
+
+
+Processor 2 (FPGA):
+    Total tasks: 326
+    Served tasks: 322
+    Dropped tasks: 4 (1.23%)
+    Tasks left in queue: 0
+    Average waiting time: 463.65 seconds
+    Total busy time: 0.0%
+    Total power consumption: 4221.0 W
+    Task type counts:
+        eMBB: 31
+        IoT: 70
+        URLLC: 221
+
+
+Total tasks: 1017
+Total served: 1000
+Total dropped: 17 (1.67%)
+Total left in queue: 0
+Total average waiting time: 455.02 seconds
+Total power consumption: 20368.5 W
+Total task type counts:
+    eMBB: 112
+    IoT: 225
+    URLLC: 663

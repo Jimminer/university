@@ -1,0 +1,125 @@
+1:
+
+SELECT COUNT(*)
+FROM products;
+
+
+2:
+
+SELECT productCode, productVendor
+FROM products
+WHERE buyPrice >= ALL (
+    SELECT buyPrice
+    FROM products
+);
+
+
+3:
+
+SELECT contactFirstName, contactLastName
+FROM customers
+WHERE customerNumber IN (
+    SELECT customerNumber
+    FROM orders
+    WHERE orderNumber IN (
+        SELECT orderNumber
+        FROM orderdetails
+        WHERE productCode IN (
+            SELECT productCode
+            FROM products
+            WHERE buyPrice <= ALL (
+                SELECT buyPrice
+                FROM products
+            )
+        )
+    )
+);
+
+
+4:
+
+SELECT customerNumber, customerName
+FROM customers
+WHERE customerName LIKE "%Gift%"
+ORDER BY customerNumber DESC;
+
+
+5:
+
+SELECT a.officeCode, COUNT(b.customerNumber) AS customers
+FROM offices a, customers b
+WHERE a.officeCode IN (
+    SELECT officeCode
+    FROM employees
+    WHERE employeeNumber IN (
+        SELECT b.salesRepEmployeeNumber
+        FROM customers
+    )
+)
+GROUP BY a.officeCode;
+
+
+6:
+
+SELECT a.customerNumber, COUNT(b.customerNumber) AS orders FROM customers a, orders b
+WHERE a.customerNumber = b.customerNumber
+GROUP BY a.customerNumber;
+
+
+7:
+
+SELECT a.customerNumber, SUM(b.quantityOrdered) AS quantities FROM customers a, orderdetails b
+WHERE b.orderNumber IN (SELECT orderNumber FROM orders WHERE customerNumber = a.customerNumber)
+GROUP BY a.customerNumber;
+
+
+8:
+
+SELECT a.customerNumber, SUM(b.priceEach * b.quantityOrdered) AS totalPrice FROM customers a, orderdetails b
+WHERE b.orderNumber IN (SELECT orderNumber FROM orders WHERE customerNumber = a.customerNumber)
+GROUP BY a.customerNumber;
+
+
+9:
+
+SELECT a.orderNumber, SUM(b.priceEach * b.quantityOrdered) AS totalPrice FROM orders a, orderdetails b
+WHERE a.orderNumber = b.orderNumber
+GROUP BY a.orderNumber;
+
+
+10:
+
+SELECT customerName, creditLimit FROM customers WHERE creditLimit > (
+	SELECT AVG(creditLimit) FROM customers
+)
+ORDER BY creditLimit ASC;
+
+
+11:
+
+SELECT a.customerName, a.creditLimit
+FROM customers a, offices b
+WHERE b.city = "Boston" AND b.officeCode IN (
+    SELECT officeCode
+    FROM employees
+    WHERE employeeNumber IN (
+        SELECT a.salesRepEmployeeNumber
+        FROM customers
+    )
+)
+ORDER BY a.creditLimit DESC;
+
+
+12:
+
+SELECT a.officeCode, AVG(b.creditLimit) AS customers
+FROM offices a, customers b
+WHERE a.officeCode IN (
+    SELECT officeCode
+    FROM employees
+    WHERE employeeNumber IN (
+        SELECT b.salesRepEmployeeNumber
+        FROM customers
+    )
+)
+GROUP BY a.officeCode;

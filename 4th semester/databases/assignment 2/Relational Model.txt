@@ -1,0 +1,12 @@
+Head(Painting) = {id, auctionId, creator, year, technique, material}
+Head(Sculpture) = {id, auctionId, creator, year, material}
+Head(Jewellery) = {id, auctionId, creator, year, type, material, gemstone}
+Head(Decoration) = {id, auctionId, creator, year, type, material}
+
+Head(Buyer) = {id, name, birthDate}
+Head(BuyerOffers) = {buyerId, objectId, price}
+Head(BuyerAuctions) = {buyerId, auctionId}
+
+Head(Auction) = {id, date, duration, managerId, winnerId}
+
+Head(Employee) = {id, name}

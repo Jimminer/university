@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "C:/Users/lab/Desktop/xristos/ergasia4502/schema_isim_beh.exe" -prj "C:/Users/lab/Desktop/xristos/ergasia4502/schema_beh.prj" "work.schema" 

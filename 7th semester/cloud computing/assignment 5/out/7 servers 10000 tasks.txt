@@ -1,0 +1,416 @@
+12m 10s
+
+Current time: 362322003.41          
+Unprocessed tasks: 0          
+Requests left: -57          
+Tasks left in queue: 0          
+Server 0 stats:
+
+Processor 0 (CPU):
+    Total tasks: 345
+    Served tasks: 200
+    Dropped tasks: 145 (42.03%)
+    Tasks left in queue: 0
+    Average waiting time: 38124.32 seconds
+    Total busy time: 0.0%
+    Total power consumption: 4264.8 W
+    Task type counts:
+        eMBB: 23
+        IoT: 46
+        URLLC: 131
+
+
+Processor 1 (GPU):
+    Total tasks: 706
+    Served tasks: 553
+    Dropped tasks: 153 (21.67%)
+    Tasks left in queue: 0
+    Average waiting time: 94305.39 seconds
+    Total busy time: 0.0%
+    Total power consumption: 14706.2 W
+    Task type counts:
+        eMBB: 50
+        IoT: 118
+        URLLC: 385
+
+
+Processor 2 (FPGA):
+    Total tasks: 396
+    Served tasks: 256
+    Dropped tasks: 140 (35.35%)
+    Tasks left in queue: 0
+    Average waiting time: 49397.61 seconds
+    Total busy time: 0.0%
+    Total power consumption: 3340.0 W
+    Task type counts:
+        eMBB: 16
+        IoT: 50
+        URLLC: 190
+
+
+Total tasks: 1447
+Total served: 1009
+Total dropped: 438 (30.27%)
+Total left in queue: 0
+Total average waiting time: 71775.55 seconds
+Total power consumption: 22311.0 W
+Total task type counts:
+    eMBB: 89
+    IoT: 214
+    URLLC: 706
+
+
+
+Server 1 stats:
+
+Processor 0 (CPU):
+    Total tasks: 209
+    Served tasks: 170
+    Dropped tasks: 39 (18.66%)
+    Tasks left in queue: 0
+    Average waiting time: 6394.58 seconds
+    Total busy time: 0.0%
+    Total power consumption: 3611.1 W
+    Task type counts:
+        eMBB: 23
+        IoT: 43
+        URLLC: 104
+
+
+Processor 1 (GPU):
+    Total tasks: 926
+    Served tasks: 572
+    Dropped tasks: 354 (38.23%)
+    Tasks left in queue: 0
+    Average waiting time: 3657.65 seconds
+    Total busy time: 0.0%
+    Total power consumption: 15246.4 W
+    Task type counts:
+        eMBB: 112
+        IoT: 114
+        URLLC: 346
+
+
+Processor 2 (FPGA):
+    Total tasks: 297
+    Served tasks: 236
+    Dropped tasks: 61 (20.54%)
+    Tasks left in queue: 0
+    Average waiting time: 8342.36 seconds
+    Total busy time: 0.0%
+    Total power consumption: 3143.2 W
+    Task type counts:
+        eMBB: 39
+        IoT: 69
+        URLLC: 128
+
+
+Total tasks: 1432
+Total served: 978
+Total dropped: 454 (31.7%)
+Total left in queue: 0
+Total average waiting time: 5263.86 seconds
+Total power consumption: 22000.7 W
+Total task type counts:
+    eMBB: 174
+    IoT: 226
+    URLLC: 578
+
+
+
+Server 2 stats:
+
+Processor 0 (CPU):
+    Total tasks: 306
+    Served tasks: 223
+    Dropped tasks: 83 (27.12%)
+    Tasks left in queue: 0
+    Average waiting time: 18703.77 seconds
+    Total busy time: 0.0%
+    Total power consumption: 4714.0 W
+    Task type counts:
+        eMBB: 27
+        IoT: 34
+        URLLC: 162
+
+
+Processor 1 (GPU):
+    Total tasks: 806
+    Served tasks: 604
+    Dropped tasks: 202 (25.06%)
+    Tasks left in queue: 0
+    Average waiting time: 63523.71 seconds
+    Total busy time: 0.0%
+    Total power consumption: 16175.0 W
+    Task type counts:
+        eMBB: 102
+        IoT: 158
+        URLLC: 344
+
+
+Processor 2 (FPGA):
+    Total tasks: 316
+    Served tasks: 263
+    Dropped tasks: 53 (16.77%)
+    Tasks left in queue: 0
+    Average waiting time: 30624.49 seconds
+    Total busy time: 0.0%
+    Total power consumption: 3483.5 W
+    Task type counts:
+        eMBB: 32
+        IoT: 70
+        URLLC: 161
+
+
+Total tasks: 1428
+Total served: 1090
+Total dropped: 338 (23.67%)
+Total left in queue: 0
+Total average waiting time: 46416.06 seconds
+Total power consumption: 24372.5 W
+Total task type counts:
+    eMBB: 161
+    IoT: 262
+    URLLC: 667
+
+
+
+Server 3 stats:
+
+Processor 0 (CPU):
+    Total tasks: 349
+    Served tasks: 181
+    Dropped tasks: 168 (48.14%)
+    Tasks left in queue: 0
+    Average waiting time: 53635.31 seconds
+    Total busy time: 0.0%
+    Total power consumption: 3877.9 W
+    Task type counts:
+        eMBB: 14
+        IoT: 29
+        URLLC: 138
+
+
+Processor 1 (GPU):
+    Total tasks: 518
+    Served tasks: 335
+    Dropped tasks: 183 (35.33%)
+    Tasks left in queue: 0
+    Average waiting time: 46633.84 seconds
+    Total busy time: 0.0%
+    Total power consumption: 8871.1 W
+    Task type counts:
+        eMBB: 27
+        IoT: 57
+        URLLC: 251
+
+
+Processor 2 (FPGA):
+    Total tasks: 573
+    Served tasks: 425
+    Dropped tasks: 148 (25.83%)
+    Tasks left in queue: 0
+    Average waiting time: 97075.03 seconds
+    Total busy time: 0.0%
+    Total power consumption: 5522.5 W
+    Task type counts:
+        eMBB: 27
+        IoT: 75
+        URLLC: 323
+
+
+Total tasks: 1440
+Total served: 941
+Total dropped: 499 (34.65%)
+Total left in queue: 0
+Total average waiting time: 70762.18 seconds
+Total power consumption: 18271.5 W
+Total task type counts:
+    eMBB: 68
+    IoT: 161
+    URLLC: 712
+
+
+
+Server 4 stats:
+
+Processor 0 (CPU):
+    Total tasks: 432
+    Served tasks: 243
+    Dropped tasks: 189 (43.75%)
+    Tasks left in queue: 0
+    Average waiting time: 56635.98 seconds
+    Total busy time: 0.0%
+    Total power consumption: 5152.6 W
+    Task type counts:
+        eMBB: 29
+        IoT: 44
+        URLLC: 170
+
+
+Processor 1 (GPU):
+    Total tasks: 426
+    Served tasks: 311
+    Dropped tasks: 115 (27.0%)
+    Tasks left in queue: 0
+    Average waiting time: 58268.64 seconds
+    Total busy time: 0.0%
+    Total power consumption: 8325.4 W
+    Task type counts:
+        eMBB: 42
+        IoT: 84
+        URLLC: 185
+
+
+Processor 2 (FPGA):
+    Total tasks: 587
+    Served tasks: 428
+    Dropped tasks: 159 (27.09%)
+    Tasks left in queue: 0
+    Average waiting time: 102052.3 seconds
+    Total busy time: 0.0%
+    Total power consumption: 5532.0 W
+    Task type counts:
+        eMBB: 53
+        IoT: 65
+        URLLC: 310
+
+
+Total tasks: 1445
+Total served: 982
+Total dropped: 463 (32.04%)
+Total left in queue: 0
+Total average waiting time: 76947.53 seconds
+Total power consumption: 19010.0 W
+Total task type counts:
+    eMBB: 124
+    IoT: 193
+    URLLC: 665
+
+
+
+Server 5 stats:
+
+Processor 0 (CPU):
+    Total tasks: 345
+    Served tasks: 161
+    Dropped tasks: 184 (53.33%)
+    Tasks left in queue: 0
+    Average waiting time: 77928.81 seconds
+    Total busy time: 0.0%
+    Total power consumption: 3448.3 W
+    Task type counts:
+        eMBB: 13
+        IoT: 27
+        URLLC: 121
+
+
+Processor 1 (GPU):
+    Total tasks: 704
+    Served tasks: 495
+    Dropped tasks: 209 (29.69%)
+    Tasks left in queue: 0
+    Average waiting time: 128570.2 seconds
+    Total busy time: 0.0%
+    Total power consumption: 13152.6 W
+    Task type counts:
+        eMBB: 50
+        IoT: 99
+        URLLC: 346
+
+
+Processor 2 (FPGA):
+    Total tasks: 384
+    Served tasks: 199
+    Dropped tasks: 185 (48.18%)
+    Tasks left in queue: 0
+    Average waiting time: 55204.97 seconds
+    Total busy time: 0.0%
+    Total power consumption: 2571.5 W
+    Task type counts:
+        eMBB: 22
+        IoT: 30
+        URLLC: 147
+
+
+Total tasks: 1433
+Total served: 855
+Total dropped: 578 (40.33%)
+Total left in queue: 0
+Total average waiting time: 101958.57 seconds
+Total power consumption: 19172.4 W
+Total task type counts:
+    eMBB: 85
+    IoT: 156
+    URLLC: 614
+
+
+
+Server 6 stats:
+
+Processor 0 (CPU):
+    Total tasks: 424
+    Served tasks: 302
+    Dropped tasks: 122 (28.77%)
+    Tasks left in queue: 0
+    Average waiting time: 31910.68 seconds
+    Total busy time: 0.0%
+    Total power consumption: 6340.0 W
+    Task type counts:
+        eMBB: 51
+        IoT: 70
+        URLLC: 181
+
+
+Processor 1 (GPU):
+    Total tasks: 502
+    Served tasks: 386
+    Dropped tasks: 116 (23.11%)
+    Tasks left in queue: 0
+    Average waiting time: 38201.06 seconds
+    Total busy time: 0.0%
+    Total power consumption: 10214.8 W
+    Task type counts:
+        eMBB: 44
+        IoT: 58
+        URLLC: 284
+
+
+Processor 2 (FPGA):
+    Total tasks: 502
+    Served tasks: 440
+    Dropped tasks: 62 (12.35%)
+    Tasks left in queue: 0
+    Average waiting time: 88836.01 seconds
+    Total busy time: 0.0%
+    Total power consumption: 5788.4 W
+    Task type counts:
+        eMBB: 74
+        IoT: 103
+        URLLC: 263
+
+
+Total tasks: 1428
+Total served: 1128
+Total dropped: 300 (21.01%)
+Total left in queue: 0
+Total average waiting time: 56268.15 seconds
+Total power consumption: 22343.2 W
+Total task type counts:
+    eMBB: 169
+    IoT: 231
+    URLLC: 728
+
+
+
+Overall stats:
+
+Overall tasks: 10053
+Overall served: 6983
+Overall dropped: 3070 (30.54%)
+Overall average waiting time: 60283.24 seconds
+Overall power consumption: 147481.3 W
+Overall task type counts:
+    eMBB: 870
+    IoT: 1443
+    URLLC: 4670
